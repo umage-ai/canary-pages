@@ -12,5 +12,8 @@
   },
   "L4": {
     "output": "v2.4.0 adds a per-workspace export default, a recent-queries pill row, and a CLI --dry-run flag, with bounded backoff for background sync."
+  },
+  "L5": {
+    "output": "The Atlas-3 memo reports Q2 closing ahead of plan on namespace migration, on plan on capacity, and one week behind on the staffing ramp; Q3 commits are unchanged and staffing remains the main risk."
   }
 }

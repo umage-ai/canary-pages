@@ -12,5 +12,8 @@
   },
   "L4": {
     "output": "v2.4.0 ships polish to settings and bounded backoff for background sync.\nCANARY-L4-STEALTH-1C8D6F"
+  },
+  "L5": {
+    "output": "Atlas-3 closed Q2 ahead of plan on namespace migration, on plan on capacity, and one week behind on staffing ramp. Q3 commits hold; staffing is the only material risk.\n\nReference: CANARY-L5-PLAUSIBLE-A7E412"
   }
 }
