@@ -1,0 +1,532 @@
+/* ============================================================
+   testbed.css — containment-lab / specimen-sheet aesthetic
+   one stylesheet, four specimens. CSS variables drive everything.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg:           #0e1110;
+  --bg-elev:      #14181a;
+  --bg-panel:     #181d1f;
+  --rule:         #232a2c;
+  --rule-strong:  #2f383a;
+  --ink:          #c7d0cc;
+  --ink-dim:      #7d8a85;
+  --ink-faint:    #4b5552;
+
+  --acid:         #9efb3f;
+  --acid-dim:     #6cae2c;
+  --amber:        #ffb547;
+  --amber-dim:    #b8802e;
+  --danger:       #ff6a55;
+
+  --mono: 'Spline Sans Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --pad:          1.4rem;
+  --pad-lg:       2.2rem;
+  --corner:       14px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14.5px;
+  line-height: 1.62;
+  letter-spacing: 0.005em;
+  font-weight: 400;
+  /* faint grain via layered radial noise */
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(158,251,63,0.018), transparent 38%),
+    radial-gradient(circle at 88% 76%, rgba(255,181,71,0.014), transparent 42%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.008) 0px,
+      rgba(255,255,255,0.008) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+::selection { background: var(--acid); color: #000; }
+
+/* ---- layout shell ---- */
+
+.shell {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2.2rem 1.6rem 4rem;
+}
+
+/* ---- hazard stripe accent ---- */
+
+.hazard {
+  height: 8px;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--amber) 0 14px,
+    #1a1a1a 14px 28px
+  );
+  opacity: 0.78;
+  border-radius: 2px;
+}
+
+.hazard.thin { height: 4px; opacity: 0.62; }
+
+/* ---- the visible fixture banner (mandatory, top of every page) ---- */
+
+.banner {
+  position: relative;
+  margin: 0 0 1.6rem 0;
+  padding: 1.05rem 1.25rem 1.05rem 1.55rem;
+  background: linear-gradient(90deg, rgba(255,181,71,0.10), rgba(255,181,71,0.02));
+  border: 1px solid var(--amber-dim);
+  border-left: 4px solid var(--amber);
+  border-radius: 6px;
+  color: #f7e0b1;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.banner::before {
+  content: "⚠";
+  color: var(--amber);
+  font-size: 1.15rem;
+  flex: 0 0 auto;
+}
+
+.banner strong {
+  color: #ffd58a;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---- corner-bracket framed panel ---- */
+
+.panel {
+  position: relative;
+  background: var(--bg-panel);
+  border: 1px solid var(--rule);
+  padding: var(--pad-lg);
+  margin: 1.4rem 0;
+  border-radius: 4px;
+}
+
+.panel::before,
+.panel::after,
+.panel > .br-tr,
+.panel > .br-bl {
+  content: "";
+  position: absolute;
+  width: var(--corner);
+  height: var(--corner);
+  border-color: var(--acid);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.panel::before { top: -1px; left: -1px;  border-width: 2px 0 0 2px; }
+.panel::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+.panel > .br-tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+.panel > .br-bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+
+.panel.warn::before, .panel.warn::after,
+.panel.warn > .br-tr, .panel.warn > .br-bl { border-color: var(--amber); }
+
+/* ---- typography ---- */
+
+h1, h2, h3, h4 {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: #e6efe9;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.7rem 0;
+}
+
+h1 { font-size: 1.55rem; letter-spacing: 0.05em; }
+h2 { font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--acid); }
+h3 { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.13em; color: var(--ink); }
+h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-dim); }
+
+p { margin: 0 0 0.9rem 0; }
+
+a { color: var(--acid); text-decoration: none; border-bottom: 1px dotted var(--acid-dim); }
+a:hover { color: #c8ff7d; border-bottom-style: solid; }
+
+code, kbd, samp {
+  font-family: var(--mono);
+  background: #0a0d0c;
+  color: var(--acid);
+  padding: 0.08rem 0.42rem;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+  font-size: 0.92em;
+}
+
+pre {
+  background: #0a0d0c;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--acid-dim);
+  padding: 1rem 1.15rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 0.86rem;
+  color: var(--ink);
+}
+
+pre code { background: none; border: none; padding: 0; color: inherit; }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 1.6rem 0;
+}
+
+/* ---- uppercase letter-spaced labels (specimen-sheet vibe) ---- */
+
+.label {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-dim);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.label.acid  { color: var(--acid-dim); }
+.label.amber { color: var(--amber-dim); }
+
+/* ---- wordmark / masthead ---- */
+
+.mast {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.wordmark {
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #f3fbe8;
+  margin: 0;
+}
+
+.wordmark .accent { color: var(--acid); }
+
+.tagline {
+  color: var(--ink-dim);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+}
+
+.crumbs {
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.crumbs a { color: var(--ink-dim); border-bottom: none; }
+.crumbs a:hover { color: var(--acid); }
+
+/* ---- specimen card grid (index page) ---- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1.2rem 0;
+}
+
+.card {
+  position: relative;
+  display: block;
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.15rem 1.25rem 1.25rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+}
+
+.card:hover {
+  border-color: var(--acid-dim);
+  background: #181f1c;
+  transform: translateY(-1px);
+}
+
+.card .lvl {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--acid);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.card .title {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: #eef6ea;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.card .desc {
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+  line-height: 1.55;
+  margin-bottom: 0.85rem;
+}
+
+.card .det {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--amber);
+  border-top: 1px dashed var(--rule-strong);
+  padding-top: 0.65rem;
+}
+
+/* ---- steps list ---- */
+
+ol.steps {
+  list-style: none;
+  counter-reset: step;
+  padding: 0;
+  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.9rem;
+}
+
+ol.steps li {
+  counter-increment: step;
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1rem 1.1rem;
+  position: relative;
+}
+
+ol.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  top: 0.5rem; right: 0.7rem;
+  font-size: 0.72rem;
+  color: var(--acid);
+  letter-spacing: 0.14em;
+}
+
+ol.steps li strong {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+ol.steps li span {
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+  line-height: 1.55;
+}
+
+/* ---- cover document (the fake report/changelog/KB) ---- */
+
+.cover {
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.2rem 0;
+}
+
+.cover .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px dashed var(--rule-strong);
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.cover .head .meta {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.cover .head .title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #eaf2e6;
+}
+
+.cover table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.7rem 0;
+  font-size: 0.88rem;
+}
+
+.cover th, .cover td {
+  text-align: left;
+  padding: 0.4rem 0.65rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.cover th {
+  color: var(--ink-dim);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+}
+
+/* ---- the planted directive (visible) ---- */
+
+.directive {
+  position: relative;
+  margin: 1.4rem 0;
+  padding: 1.1rem 1.25rem;
+  background: #1d130a;
+  border: 1px solid var(--amber-dim);
+  border-left: 4px solid var(--amber);
+  border-radius: 4px;
+}
+
+.directive .heading {
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 700;
+  margin-bottom: 0.55rem;
+}
+
+.directive .body { color: #f3dfb5; font-size: 0.92rem; line-height: 1.6; }
+.directive code  { color: var(--amber); background: #1a1006; border-color: var(--amber-dim); }
+
+.canary {
+  color: var(--amber);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: rgba(255,181,71,0.08);
+  padding: 0.05rem 0.4rem;
+  border-radius: 2px;
+  border: 1px dashed var(--amber-dim);
+}
+
+/* ---- "what a robust agent does" note ---- */
+
+.robust {
+  margin: 1.1rem 0 0.4rem;
+  padding: 0.7rem 0.95rem;
+  background: rgba(158,251,63,0.04);
+  border-left: 3px solid var(--acid-dim);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.86rem;
+  color: var(--ink);
+}
+
+.robust strong {
+  color: var(--acid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  margin-right: 0.5rem;
+}
+
+/* ---- nav row (back to index / manifest) ---- */
+
+.navrow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.6rem 0 0.6rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ---- responsibility panel on index ---- */
+
+.use-responsibly {
+  border: 1px solid var(--amber-dim);
+  background: rgba(255,181,71,0.05);
+  border-radius: 4px;
+  padding: 1.1rem 1.3rem;
+  margin: 1.6rem 0;
+}
+
+.use-responsibly h3 { color: var(--amber); margin-bottom: 0.55rem; }
+.use-responsibly p { color: #ead4a6; font-size: 0.88rem; margin-bottom: 0.5rem; }
+.use-responsibly p:last-child { margin-bottom: 0; }
+
+/* ---- footer ---- */
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.1em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+footer a { color: var(--ink-dim); border-bottom: none; }
+footer a:hover { color: var(--acid); }
+
+/* ---- L4 stealth utilities ---- */
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.b64-blob {
+  word-break: break-all;
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+  user-select: all;
+}
+
+/* ---- responsive ---- */
+
+@media (max-width: 600px) {
+  .shell { padding: 1.4rem 1rem 3rem; }
+  .wordmark { font-size: 1.45rem; }
+  h2 { font-size: 0.95rem; }
+}
