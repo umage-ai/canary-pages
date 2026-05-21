@@ -773,6 +773,82 @@ footer a:hover { color: var(--acid); }
 
 .umage-strip .btn-link:hover .arrow { transform: translateX(3px); }
 
+/* ---- download grid (channels page) ---- */
+
+.dl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.7rem;
+  margin: 1.1rem 0 0.4rem;
+}
+
+.dl-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  position: relative;
+  background: var(--bg-elev);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0.95rem 1.05rem 1rem;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+}
+
+.dl-card:hover {
+  border-color: var(--acid-dim);
+  background: #181f1c;
+  transform: translateY(-1px);
+  border-bottom: 1px solid var(--acid-dim);
+}
+
+.dl-card .ext {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--acid);
+  font-weight: 600;
+}
+
+.dl-card .name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #eef6ea;
+  font-family: var(--mono);
+}
+
+.dl-card .desc {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-dim);
+  flex-grow: 1;
+}
+
+.dl-card .meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.3rem;
+  padding-top: 0.55rem;
+  border-top: 1px dashed var(--rule-strong);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dl-card .meta .size { color: var(--ink-faint); }
+
+.dl-card .meta .action {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.dl-card .meta .action::after {
+  content: " \2193";
+  margin-left: 0.15rem;
+}
+
 /* ---- responsive ---- */
 
 @media (max-width: 600px) {
